@@ -1,3 +1,13 @@
+{
+	function astNode( name, value )
+	{
+		return {
+			name : name,
+			value : value
+		};
+	}
+}
+
 start =
 	statement*
 
@@ -15,15 +25,15 @@ rule =
 	from /
 	pointradius /
 	lang /
-	term 
+	keyword:term { return astNode( 'term', keyword ); }
 
 term =
-	quote term quote /
-	keyword _ term /
-	keyword
+	q1:quote string:term q2:quote { return string; } / // should this return quotes?
+	s1:keyword whiteSpace s2:term { return s1 + " " + s2; } /
+	s1:keyword 
 
 keyword =
-	!or [a-zA-Z']+
+	!or string:[a-zA-Z']+ { return string.join(""); }
 
 boolean =
 	or /
@@ -46,7 +56,7 @@ proximity =
 	term "~" [0-9]+
 
 lang = 
-	"lang:"[a-z]{2}
+	"lang:" code:langCodes { return astNode('lang', code); }
 
 pointradius =
 	"point_radius:[-105.27346517 40.01924738 10.0mi]" // todo
@@ -72,5 +82,11 @@ or =
 and = 
 	_
 
+whiteSpace
+	= [ \t\n\r]
+
 _ "whitespace"
 	= [ \t\n\r]*
+
+langCodes = 
+	["am"|"ar"|"hy"|"bn"|"bg"|"my"|"zh"|"cs"|"da"|"nl"|"en"|"et"|"fi"|"fr"|"ka"|"de"|"el"|"gu"|"ht"|"iw"|"hi"|"hu"|"is"|"in"|"it"|"ja"|"kn"|"km"|"ko"|"lo"|"lv"|"lt"|"ml"|"dv"|"mr"|"ne"|"no"|"or"|"pa"|"ps"|"fa"|"pl"|"pt"|"ro"|"ru"|"sr"|"sd"|"si"|"sk"|"sl"|"ckb"|"es"|"sv"|"tl"|"ta"|"te"|"th"|"bo"|"tr"|"uk"|"ur"|"ug"|"vi"|"cy"]
