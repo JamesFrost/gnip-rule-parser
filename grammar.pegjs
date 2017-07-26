@@ -22,7 +22,7 @@ start =
 	statement*
 
 statement =
-	lb statement rb _ boolean _ statement /
+	lb child1:statement rb _ bool:boolean _ child2:statement { return branchAstNode( 'boolean', bool, child1, child2 ); } /
 	lb st:statement rb { return st; } /
 	operator _ statement /
 	child1:operator _ bool:boolean _ child2:statement { return branchAstNode( 'boolean', bool, child1, child2 ); } /
@@ -51,7 +51,7 @@ boolean =
 	and
 
 negator =
-	"-"
+	"-" { return 'NOT'; }
 
 quote =
 	"\""
@@ -93,7 +93,7 @@ and =
 	_ { return 'AND'; }
 
 whiteSpace
-	= [ \t\n\r]
+	= [ \t\n\r\s]
 
 _ "whitespace"
 	= [ \t\n\r]*
