@@ -1,0 +1,22 @@
+{
+  "name": "gnip-rule-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "grammar.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesFrost/gnip-rule-parser.git"
+  },
+  "author": "James Frost <hello@jamesfrost.me> (http://jamesfrost.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JamesFrost/gnip-rule-parser/issues"
+  },
+  "homepage": "https://github.com/JamesFrost/gnip-rule-parser#readme",
+  "dependencies": {
+    "assert": "^1.4.1"
+  }
+}
