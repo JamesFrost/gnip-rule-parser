@@ -24,7 +24,6 @@ start =
 statement =
 	lb child1:statement rb _ bool:boolean _ child2:statement { return branchAstNode( 'boolean', bool, child1, child2 ); } /
 	lb st:statement rb { return st; } /
-	operator _ statement /
 	child1:operator _ bool:boolean _ child2:statement { return branchAstNode( 'boolean', bool, child1, child2 ); } /
 	operator 
 
