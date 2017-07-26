@@ -1,61 +1,153 @@
 const assert = require( 'assert' );
 
+const parser = require( './grammar.js' );
+
 describe('gnip-rule-parser', function()
 {
-	const parser = require( './grammar.js' );
-
-	it('Keyword match', function()
+	describe('Documentation Examples', function()
 	{
-		parser.parse( 'happy' );
-	});
+		it('Keyword match', function()
+		{	
+			const expectedAst = 
+			[
+				{
+					name : "term",
+					value : "happy"
+				}
+			];
 
-	it('ANDing terms with white space', function()
-	{
-		parser.parse( 'happy party' );
-	});
+			const actualAst = parser.parse( 'happy' );
 
-	it('ORing terms with upper-case OR', function()
-	{
-		parser.parse( 'happy OR party' );
-	});
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
 
-	it('Negating terms', function()
-	{
-		parser.parse( 'happy -birthday' );
-	});
+		it('ANDing terms with white space', function()
+		{
+			const expectedAst = 
+			[
+				{
+					name : "term",
+					value : "happy party"
+				}
+			];
 
-	it('Grouping with parentheses', function()
-	{
-		parser.parse( '(happy OR party) (holiday OR house) -(birthday OR democratic OR republican)' );
-	});
+			const actualAst = parser.parse( 'happy party' );
 
-	it('Exact match', function()
-	{
-		parser.parse( '"happy birthday"' );
-	});
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
 
-	it('Substring match', function()
-	{
-		parser.parse( 'contains:day' );
-	});
+		it('ORing terms with upper-case OR', function()
+		{
+			const expectedAst = 
+			[
+				{
+					name: "boolean",
+					value: "OR",
+					leftBranch: {
+						name: "term",
+						value: "happy"
+					},
+					rightBranch: {
+						name: "term",
+						value: "party"
+					}
+				}
+			];
 
-	it('Proximity match', function()
-	{
-		parser.parse( '"happy birthday"~3' );
-	});
+			const actualAst = parser.parse( 'happy OR party' );
 
-	it('The user who is posting a Tweet', function()
-	{
-		parser.parse( 'from:user' );
-	});
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
 
-	it('Geo-tagged Tweets within 10 miles of Pearl St. in Boulder, CO', function()
-	{
-		parser.parse( 'point_radius:[-105.27346517 40.01924738 10.0mi]' );
-	});
+		it('Negating terms', function()
+		{
+			const expectedAst = 
+			[
+				{
+					name: "boolean",
+					value: "NOT",
+					leftBranch: {
+						name: "term",
+						value: "happy"
+					},
+					rightBranch: {
+						name: "term",
+						value: "birthday"
+					}
+				}
+			];
 
-	it('Putting it all together', function()
-	{
-		parser.parse( '(happy OR party) (holiday OR house OR "new year\'s eve") point_radius:[-105.27346517 40.01924738 10.0mi] lang:en -(birthday OR democratic OR republican)');
+			const actualAst = parser.parse( 'happy -birthday' );
+
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
+
+		it('Grouping with parentheses', function()
+		{
+			// TODO : AST test
+			parser.parse( '(happy OR party) (holiday OR house) -(birthday OR democratic OR republican)' );
+		});
+
+		it('Exact match', function()
+		{
+			// TODO - Differ ast for exact match?
+			const expectedAst = 
+			[
+				{
+					name : "term",
+					value : "happy birthday"
+				}
+			];
+
+			const actualAst = parser.parse( '"happy birthday"' );
+
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
+
+		it('Substring match', function()
+		{
+			const expectedAst = 
+			[
+				{
+					name : "contains",
+					value : "day"
+				}
+			];
+
+			const actualAst = parser.parse( 'contains:day' );
+
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
+
+		it('Proximity match', function()
+		{
+			// TODO : AST test
+			parser.parse( '"happy birthday"~3' );
+		});
+
+		it('The user who is posting a Tweet', function()
+		{
+			const expectedAst = 
+			[
+				{
+					name : "from",
+					value : "user"
+				}
+			];
+
+			const actualAst = parser.parse( 'from:user' );
+
+			// assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
+
+		it('Geo-tagged Tweets within 10 miles of Pearl St. in Boulder, CO', function()
+		{
+			parser.parse( 'point_radius:[-105.27346517 40.01924738 10.0mi]' );
+		});
+
+		it('Putting it all together', function()
+		{
+			parser.parse( '(happy OR party) (holiday OR house OR "new year\'s eve") point_radius:[-105.27346517 40.01924738 10.0mi] lang:en -(birthday OR democratic OR republican)');
+		});
 	});
 });

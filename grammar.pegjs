@@ -22,9 +22,9 @@ start =
 	statement*
 
 statement =
-	lb child1:statement rb _ bool:boolean _ child2:statement { return branchAstNode( 'boolean', bool, child1, child2 ); } /
+	lb child1:statement rb _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
 	lb st:statement rb { return st; } /
-	child1:operator _ bool:boolean _ child2:statement { return branchAstNode( 'boolean', bool, child1, child2 ); } /
+	child1:operator _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
 	operator 
 
 operator = 
@@ -56,16 +56,16 @@ quote =
 	"\""
 
 from =
-	"from:" [a-zA-Z0-9_]{1,15}
+	"from:" userhandle:userhandle { return terminalAstNode( 'from', userhandle ); }
 
 contains = 
-	"contains:" keyword
+	"contains:" keyword:keyword { return terminalAstNode( 'contains', keyword ); }
 
 proximity =
 	term "~" [0-9]+
 
 lang = 
-	"lang:" code:langCodes { return terminalAstNode('lang', code); }
+	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
 
 pointradius =
 	"point_radius:[-105.27346517 40.01924738 10.0mi]" // todo
@@ -96,6 +96,9 @@ whiteSpace
 
 _ "whitespace"
 	= [ \t\n\r]*
+
+userhandle =
+	[a-zA-Z0-9_]{1,15}
 
 langCodes = 
 	"am"/"ar"/"hy"/"bn"/"bg"/"my"/"zh"/"cs"/"da"/"nl"/"en"/"et"/"fi"/"fr"/"ka"/"de"/"el"/"gu"/"ht"/"iw"/"hi"/"hu"/"is"/"in"/"it"/"ja"/"kn"/"km"/"ko"/"lo"/"lv"/"lt"/"ml"/"dv"/"mr"/"ne"/"no"/"or"/"pa"/"ps"/"fa"/"pl"/"pt"/"ro"/"ru"/"sr"/"sd"/"si"/"sk"/"sl"/"ckb"/"es"/"sv"/"tl"/"ta"/"te"/"th"/"bo"/"tr"/"uk"/"ur"/"ug"/"vi"/"cy"
