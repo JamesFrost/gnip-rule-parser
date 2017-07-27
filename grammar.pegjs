@@ -50,7 +50,7 @@ boolean =
 	and
 
 negator =
-	"-" { return 'NOT'; }
+	minus { return 'NOT'; }
 
 quote =
 	"\""
@@ -62,22 +62,22 @@ contains =
 	"contains:" keyword:keyword { return terminalAstNode( 'contains', keyword ); }
 
 proximity =
-	term:term "~" distance:[0-9]+ { return terminalAstNode( 'proximity', { term : term, distance : distance.join("") } ); }
+	term:term "~" distance:number+ { return terminalAstNode( 'proximity', { term : term, distance : distance.join("") } ); }
 
 lang = 
 	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
 
 pointradius =
-	"point_radius:[-105.27346517 40.01924738 10.0mi]" // todo
+	"point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); }
 
-// latitude =
-// 	"-"?[0-90]
+latitude = 
+	minus:minus? latitude:number+ period decimal:number+ { return '' + minus + latitude.join('') + '.' + decimal.join(''); } // TODO : limit number range
 
-// longitude =
-// 	"-"? 
+longitude = 
+	minus:minus? longitude:number+ period decimal:number+ { return '' + ( minus || '' ) + longitude.join('') + '.' + decimal.join(''); } // TODO : limit number range
 
 distance =
-	"10.0mi" // todo
+	number:number+ "." decimal:number+ unit:"mi" { return number.join('') + '.' + decimal.join('') + unit; } // TODO : other distance units
 
 lb = 
 	"("
@@ -88,8 +88,17 @@ rb =
 or =
 	"OR"
 
+minus =
+	"-"
+
+period =
+	"."
+
 and = 
 	_ { return 'AND'; }
+
+number =
+	number:[0-9]
 
 whiteSpace
 	= [ \t\n\r\s]

@@ -155,7 +155,22 @@ describe('gnip-rule-parser', function()
 
 		it('Geo-tagged Tweets within 10 miles of Pearl St. in Boulder, CO', function()
 		{
-			parser.parse( 'point_radius:[-105.27346517 40.01924738 10.0mi]' );
+			const expectedAst = 
+			[
+				{
+					name : "point_radius",
+					value :
+					{
+						latitude : '-105.27346517',
+						longitude : '40.01924738',
+						distance : '10.0mi'
+					}
+				}
+			];
+
+			const actualAst = parser.parse( 'point_radius:[-105.27346517 40.01924738 10.0mi]' );
+
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 		});
 
 		it('Putting it all together', function()
