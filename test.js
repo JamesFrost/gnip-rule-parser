@@ -26,8 +26,18 @@ describe('gnip-rule-parser', function()
 			const expectedAst = 
 			[
 				{
-					name : "term",
-					value : "happy party"
+					name : 'boolean',
+					value : 'AND',
+					leftBranch : 
+					{
+						name : 'term',
+						value : 'happy'
+					},
+					rightBranch :
+					{
+						name : 'term',
+						value : 'party'
+					}
 				}
 			];
 
