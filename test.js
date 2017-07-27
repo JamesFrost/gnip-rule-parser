@@ -137,7 +137,7 @@ describe('gnip-rule-parser', function()
 
 			const actualAst = parser.parse( 'from:user' );
 
-			// assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 		});
 
 		it('Geo-tagged Tweets within 10 miles of Pearl St. in Boulder, CO', function()

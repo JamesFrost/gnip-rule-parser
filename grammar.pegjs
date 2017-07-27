@@ -98,7 +98,7 @@ _ "whitespace"
 	= [ \t\n\r]*
 
 userhandle =
-	[a-zA-Z0-9_]{1,15}
+	userhandle:[a-zA-Z0-9_]+ { return userhandle.join(""); } // TODO: Limit username length to 15 characters
 
 langCodes = 
 	"am"/"ar"/"hy"/"bn"/"bg"/"my"/"zh"/"cs"/"da"/"nl"/"en"/"et"/"fi"/"fr"/"ka"/"de"/"el"/"gu"/"ht"/"iw"/"hi"/"hu"/"is"/"in"/"it"/"ja"/"kn"/"km"/"ko"/"lo"/"lv"/"lt"/"ml"/"dv"/"mr"/"ne"/"no"/"or"/"pa"/"ps"/"fa"/"pl"/"pt"/"ro"/"ru"/"sr"/"sd"/"si"/"sk"/"sl"/"ckb"/"es"/"sv"/"tl"/"ta"/"te"/"th"/"bo"/"tr"/"uk"/"ur"/"ug"/"vi"/"cy"
