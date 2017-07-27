@@ -35,16 +35,17 @@
 }
 
 start =
-	statement*
+	_ statement:statement* _ { return statement; }
 
 statement =
-	lb child1:statement rb _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
+	lb _ child1:statement _ rb _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
 	lb _ st:statement _ rb { return st; } /
 	child1:operator _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
 	operator 
 
 operator = 
 	lb _ op:operator _ rb { return op; } / 
+	followersCount /
 	contains /
 	proximity /
 	from /
@@ -53,14 +54,43 @@ operator =
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
 term =
-	quote string:keywordString+ strings:(whiteSpace keywordString+)* quote  { return string.join("") + ' ' + multidimensionalArrayToString( strings ); } /
+	quote _ string:keywordString+ strings:(_ keywordString+)* _ quote  { return string.join("") + ' ' + multidimensionalArrayToString( strings ); } /
 	characterString
+
+followersCount =
+	"followers_count:" number:number+ { return terminalAstNode( 'followers_count', number ); }
+
+from =
+	"from:" userhandle:number { return terminalAstNode( 'from', userhandle ); } /
+	"from:" userhandle:userhandle { return terminalAstNode( 'from', userhandle ); } 
+
+contains = 
+	"contains:" quote keyword:characterString quote { return terminalAstNode( 'contains', keyword ); } /
+	"contains:" keyword:characterString { return terminalAstNode( 'contains', keyword ); }
+
+proximity =
+	term:term "~" distance:number { return terminalAstNode( 'proximity', { term : term, distance : distance } ); }
+
+lang = 
+	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
+
+pointradius =
+	"point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); }
+
+latitude = 
+	minus:minus? latitude:number period decimal:number { return '' + minus + latitude + '.' + decimal; } // TODO : limit number range
+
+longitude = 
+	minus:minus? longitude:number period decimal:number { return '' + ( minus || '' ) + longitude + '.' + decimal; } // TODO : limit number range
+
+distance =
+	number:number "." decimal:number unit:"mi" { return number + '.' + decimal + unit; } // TODO : other distance units
 
 keywordString =
 	[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\]^_`{|}~]
 
 characterString =
-	!or string:[a-zA-Z0-9_']+ { return string.join(""); }
+	!or string:[a-zA-Z0-9_@,#']+ { return string.join(""); }
 
 boolean =
 	or /
@@ -72,30 +102,6 @@ negator =
 
 quote =
 	"\""
-
-from =
-	"from:" userhandle:userhandle { return terminalAstNode( 'from', userhandle ); }
-
-contains = 
-	"contains:" keyword:characterString { return terminalAstNode( 'contains', keyword ); }
-
-proximity =
-	term:term "~" distance:number+ { return terminalAstNode( 'proximity', { term : term, distance : distance.join("") } ); }
-
-lang = 
-	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
-
-pointradius =
-	"point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); }
-
-latitude = 
-	minus:minus? latitude:number+ period decimal:number+ { return '' + minus + latitude.join('') + '.' + decimal.join(''); } // TODO : limit number range
-
-longitude = 
-	minus:minus? longitude:number+ period decimal:number+ { return '' + ( minus || '' ) + longitude.join('') + '.' + decimal.join(''); } // TODO : limit number range
-
-distance =
-	number:number+ "." decimal:number+ unit:"mi" { return number.join('') + '.' + decimal.join('') + unit; } // TODO : other distance units
 
 lb = 
 	"("
@@ -116,7 +122,7 @@ and =
 	_ { return 'AND'; }
 
 number =
-	number:[0-9]
+	number:[0-9]+ { return number.join(''); }
 
 punctuation =
 	[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]
