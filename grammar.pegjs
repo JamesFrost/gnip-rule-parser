@@ -62,7 +62,7 @@ contains =
 	"contains:" keyword:keyword { return terminalAstNode( 'contains', keyword ); }
 
 proximity =
-	term "~" [0-9]+
+	term:term "~" distance:[0-9]+ { return terminalAstNode( 'proximity', { term : term, distance : distance.join("") } ); }
 
 lang = 
 	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }

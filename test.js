@@ -121,8 +121,21 @@ describe('gnip-rule-parser', function()
 
 		it('Proximity match', function()
 		{
-			// TODO : AST test
-			parser.parse( '"happy birthday"~3' );
+			const expectedAst = 
+			[
+				{
+					name : "proximity",
+					value : 
+					{
+						term : "happy birthday",
+						distance : 3
+					}
+				}
+			];
+
+			const actualAst = parser.parse( '"happy birthday"~3' );
+
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 		});
 
 		it('The user who is posting a Tweet', function()
