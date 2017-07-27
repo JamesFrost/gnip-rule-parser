@@ -16,6 +16,22 @@
 			rightBranch : rightBranch
 		};
 	}
+
+	function multidimensionalArrayToString( array )
+	{
+		if( array === undefined )
+			return '';
+
+		return array.map(function( thisArrayElement )
+		{
+			return thisArrayElement.reduce(function( carry, thisElement )
+			{
+				return carry + ' ' + thisElement.join( '' );
+
+			}).trim();
+
+		}).join( ' ' ).trim();
+	}
 }
 
 start =
@@ -23,12 +39,12 @@ start =
 
 statement =
 	lb child1:statement rb _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
-	lb st:statement rb { return st; } /
+	lb _ st:statement _ rb { return st; } /
 	child1:operator _ boolean:boolean _ child2:statement { return branchAstNode( 'boolean', boolean, child1, child2 ); } /
 	operator 
 
 operator = 
-	lb op:operator rb { return op; } / 
+	lb _ op:operator _ rb { return op; } / 
 	contains /
 	proximity /
 	from /
@@ -37,12 +53,14 @@ operator =
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
 term =
-	q1:quote string:term q2:quote { return string; } / // should this return quotes?
-	s1:keyword whiteSpace s2:term { return s1 + " " + s2; } /
-	s1:keyword 
+	quote string:keywordString+ strings:(whiteSpace keywordString+)* quote  { return string.join("") + ' ' + multidimensionalArrayToString( strings ); } /
+	characterString
 
-keyword =
-	!or string:[a-zA-Z']+ { return string.join(""); }
+keywordString =
+	[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\]^_`{|}~]
+
+characterString =
+	!or string:[a-zA-Z0-9_']+ { return string.join(""); }
 
 boolean =
 	or /
@@ -59,7 +77,7 @@ from =
 	"from:" userhandle:userhandle { return terminalAstNode( 'from', userhandle ); }
 
 contains = 
-	"contains:" keyword:keyword { return terminalAstNode( 'contains', keyword ); }
+	"contains:" keyword:characterString { return terminalAstNode( 'contains', keyword ); }
 
 proximity =
 	term:term "~" distance:number+ { return terminalAstNode( 'proximity', { term : term, distance : distance.join("") } ); }
@@ -99,6 +117,9 @@ and =
 
 number =
 	number:[0-9]
+
+punctuation =
+	[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]
 
 whiteSpace
 	= [ \t\n\r\s]
