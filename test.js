@@ -4,6 +4,7 @@ const parser = require( './grammar.js' );
 
 describe('gnip-rule-parser', function()
 {
+	// http://support.gnip.com/apis/powertrack2.0/rules.html
 	describe('Documentation Examples', function()
 	{
 		it('Keyword match', function()
@@ -148,7 +149,7 @@ describe('gnip-rule-parser', function()
 			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 		});
 
-		it('The user who is posting a Tweet', function()
+		it('The user who is posting a Tweet (username)', function()
 		{
 			const expectedAst = 
 			[
@@ -159,6 +160,21 @@ describe('gnip-rule-parser', function()
 			];
 
 			const actualAst = parser.parse( 'from:user' );
+
+			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		});
+
+		it('The user who is posting a Tweet (user id)', function()
+		{
+			const expectedAst = 
+			[
+				{
+					name : "from",
+					value : "3141592654"
+				}
+			];
+
+			const actualAst = parser.parse( 'from:3141592654' );
 
 			assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 		});
@@ -188,4 +204,48 @@ describe('gnip-rule-parser', function()
 			parser.parse( '(happy OR party) (holiday OR house OR "new year\'s eve") point_radius:[-105.27346517 40.01924738 10.0mi] lang:en -(birthday OR democratic OR republican)');
 		});
 	});
+
+	describe('Other Examples', function()
+	{
+		it('Keyword match', function()
+		{	
+			parser.parse( '(\"powertrack -operators\" OR (-\"streaming code\"~4 foo OR bar))' );
+		});
+	});
+	// // https://github.com/jeroenr/gnip-rule-validator/blob/master/src/test/scala/com/github/jeroenr/gnip/rule/validation/GnipRuleValidatorSpec.scala
+	// describe('Rule Validator Examples', function()
+	// {
+	// 	it('Keyword match', function()
+	// 	{	
+	// 		parser.parse( 'h' );
+	// 	});
+
+	// 	it('NOT accept single #', function()
+	// 	{	
+	// 		assert.throws(function()
+	// 		{
+	// 			parser.parse( '#' );
+
+	// 		}, /^SyntaxError: Expected/);
+	// 	});
+
+	// 	it('NOT accept single @', function()
+	// 	{	
+	// 		assert.throws(function()
+	// 		{
+	// 			parser.parse( '@' );
+
+	// 		}, /^SyntaxError: Expected/);
+	// 	});
+
+	// 	it('NOT accept single @ in phrase', function()
+	// 	{	
+	// 		assert.throws(function()
+	// 		{
+	// 			parser.parse( '@' );
+
+	// 		}, /^SyntaxError: Expected/);
+	// 	});
+	// });
+
 });

@@ -45,6 +45,7 @@ statement =
 
 operator = 
 	lb _ op:operator _ rb { return op; } / 
+	negator op1:operator whiteSpace op2:operator { return branchAstNode( 'boolean', 'NOT', op2, op1 ); } /
 	followersCount /
 	contains /
 	proximity /
@@ -90,7 +91,7 @@ keywordString =
 	[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\]^_`{|}~]
 
 characterString =
-	!or string:[a-zA-Z0-9_@,#']+ { return string.join(""); }
+	!or string:[a-zA-Z0-9_@,#'$]+ { return string.join(""); }
 
 boolean =
 	or /
