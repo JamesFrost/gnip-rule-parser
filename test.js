@@ -205,6 +205,270 @@ describe('gnip-rule-parser', function()
 		});
 	});
 
+	describe('List of Operators Examples', function()
+	{
+		describe('Emoji', function()
+		{	
+			it('Single Emoji', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : "term",
+						value : "🍕"
+					}
+				];
+
+				const actualAst = parser.parse( '🍕' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			it('Multiple Emoji', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : "term",
+						value : "I need 🍕"
+					}
+				];
+
+				const actualAst = parser.parse( '"I need 🍕"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			// it('Emoji Variant', function()
+			// {
+			// 	const expectedAst = 
+			// 	[
+			// 		{
+			// 			name : "term",
+			// 			value : "\u2615"
+			// 		}
+			// 	];
+
+			// 	const actualAst = parser.parse( '"\u2615"' );
+
+			// 	assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			// });
+		});
+
+
+		describe('Exact Phrase Match', function()
+		{	
+			it('Basic', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'boolean',
+						value : 'AND',
+						leftBranch :
+						{
+							name : 'term',
+							value : 'call'
+						},
+						rightBranch : 
+						{
+							name : 'term',
+							value : 'gnip'
+						}
+					}
+				];
+
+				const actualAst = parser.parse( 'call gnip' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			// it('Basic', function()
+			// {
+			// 	const expectedAst = 
+			// 	[
+			// 		{
+			// 			name : "term",
+			// 			value : "one/two"
+			// 		}
+			// 	];
+
+			// 	const actualAst = parser.parse( '"one/two"' );
+
+			// 	assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			// });
+		});
+
+		describe('Contains', function()
+		{	
+			it('No quotes', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'contains',
+						value : 'phone'
+					}
+				];
+
+				const actualAst = parser.parse( 'contains:phone' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			it('Quotes', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'contains',
+						value : '$TWTR'
+					}
+				];
+
+				const actualAst = parser.parse( 'contains:"$TWTR"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
+
+		describe('From', function()
+		{	
+			it('User id', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'from',
+						value : '17200003'
+					}
+				];
+
+				const actualAst = parser.parse( 'from:17200003' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			it('User handle', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'from',
+						value : 'mikesmith'
+					}
+				];
+
+				const actualAst = parser.parse( 'from:mikesmith' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
+
+		describe('To', function()
+		{	
+			it('User id', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'to',
+						value : '17200003'
+					}
+				];
+
+				const actualAst = parser.parse( 'to:17200003' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			it('User handle', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'to',
+						value : 'mikesmith'
+					}
+				];
+
+				const actualAst = parser.parse( 'to:mikesmith' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
+
+		// describe('Url', function()
+		// {	
+		// 	it('No quotes', function()
+		// 	{
+		// 		const expectedAst = 
+		// 		[
+		// 			{
+		// 				name : 'url',
+		// 				value : 'gnip'
+		// 			}
+		// 		];
+
+		// 		const actualAst = parser.parse( 'url:gnip' );
+
+		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		// 	});
+
+		// 	it('Quotes', function()
+		// 	{
+		// 		const expectedAst = 
+		// 		[
+		// 			{
+		// 				name : 'url',
+		// 				value : 'big-data'
+		// 			}
+		// 		];
+
+		// 		const actualAst = parser.parse( 'url:"big-data"' );
+
+		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		// 	});
+		// });
+
+		// describe('Url Title', function()
+		// {	
+		// 	it('Url Title', function()
+		// 	{
+		// 		const expectedAst = 
+		// 		[
+		// 			{
+		// 				name : 'url_title',
+		// 				value : 'snow'
+		// 			}
+		// 		];
+
+		// 		const actualAst = parser.parse( 'url_title:snow' );
+
+		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		// 	});
+		// });
+
+		// describe('Url Description', function()
+		// {	
+		// 	it('Url Description', function()
+		// 	{
+		// 		const expectedAst = 
+		// 		[
+		// 			{
+		// 				name : 'url_description',
+		// 				value : 'snow'
+		// 			}
+		// 		];
+
+		// 		const actualAst = parser.parse( 'url_description:snow' );
+
+		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+		// 	});
+		// });
+
+	});
+
 	describe('Other Examples', function()
 	{
 		it('Keyword match', function()
@@ -212,40 +476,6 @@ describe('gnip-rule-parser', function()
 			parser.parse( '(\"powertrack -operators\" OR (-\"streaming code\"~4 foo OR bar))' );
 		});
 	});
-	// // https://github.com/jeroenr/gnip-rule-validator/blob/master/src/test/scala/com/github/jeroenr/gnip/rule/validation/GnipRuleValidatorSpec.scala
-	// describe('Rule Validator Examples', function()
-	// {
-	// 	it('Keyword match', function()
-	// 	{	
-	// 		parser.parse( 'h' );
-	// 	});
 
-	// 	it('NOT accept single #', function()
-	// 	{	
-	// 		assert.throws(function()
-	// 		{
-	// 			parser.parse( '#' );
-
-	// 		}, /^SyntaxError: Expected/);
-	// 	});
-
-	// 	it('NOT accept single @', function()
-	// 	{	
-	// 		assert.throws(function()
-	// 		{
-	// 			parser.parse( '@' );
-
-	// 		}, /^SyntaxError: Expected/);
-	// 	});
-
-	// 	it('NOT accept single @ in phrase', function()
-	// 	{	
-	// 		assert.throws(function()
-	// 		{
-	// 			parser.parse( '@' );
-
-	// 		}, /^SyntaxError: Expected/);
-	// 	});
-	// });
-
+	// https://github.com/jeroenr/gnip-rule-validator/blob/master/src/test/scala/com/github/jeroenr/gnip/rule/validation/GnipRuleValidatorSpec.scala
 });
