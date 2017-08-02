@@ -398,74 +398,74 @@ describe('gnip-rule-parser', function()
 			});
 		});
 
-		// describe('Url', function()
-		// {	
-		// 	it('No quotes', function()
-		// 	{
-		// 		const expectedAst = 
-		// 		[
-		// 			{
-		// 				name : 'url',
-		// 				value : 'gnip'
-		// 			}
-		// 		];
+		describe('Url', function()
+		{	
+			it('No quotes', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'url',
+						value : 'gnip'
+					}
+				];
 
-		// 		const actualAst = parser.parse( 'url:gnip' );
+				const actualAst = parser.parse( 'url:gnip' );
 
-		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
-		// 	});
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
 
-		// 	it('Quotes', function()
-		// 	{
-		// 		const expectedAst = 
-		// 		[
-		// 			{
-		// 				name : 'url',
-		// 				value : 'big-data'
-		// 			}
-		// 		];
+			it('Quotes', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'url',
+						value : 'big-data'
+					}
+				];
 
-		// 		const actualAst = parser.parse( 'url:"big-data"' );
+				const actualAst = parser.parse( 'url:"big-data"' );
 
-		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
-		// 	});
-		// });
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
 
-		// describe('Url Title', function()
-		// {	
-		// 	it('Url Title', function()
-		// 	{
-		// 		const expectedAst = 
-		// 		[
-		// 			{
-		// 				name : 'url_title',
-		// 				value : 'snow'
-		// 			}
-		// 		];
+		describe('Url Title', function()
+		{	
+			it('Url Title', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'url_title',
+						value : 'snow'
+					}
+				];
 
-		// 		const actualAst = parser.parse( 'url_title:snow' );
+				const actualAst = parser.parse( 'url_title:snow' );
 
-		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
-		// 	});
-		// });
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
 
-		// describe('Url Description', function()
-		// {	
-		// 	it('Url Description', function()
-		// 	{
-		// 		const expectedAst = 
-		// 		[
-		// 			{
-		// 				name : 'url_description',
-		// 				value : 'snow'
-		// 			}
-		// 		];
+		describe('Url Description', function()
+		{	
+			it('Url Description', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'url_description',
+						value : 'snow'
+					}
+				];
 
-		// 		const actualAst = parser.parse( 'url_description:snow' );
+				const actualAst = parser.parse( 'url_description:snow' );
 
-		// 		assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
-		// 	});
-		// });
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
 
 	});
 

@@ -61,7 +61,9 @@ operator =
 	contains /
 	proximity /
 	from /
-	// url /
+  url /
+  urlTitle /
+	urlDescription /
 	to /
 	pointradius /
 	lang /
@@ -82,12 +84,17 @@ to =
 	"to:" userhandle:number { return terminalAstNode( 'to', userhandle ); } /
 	"to:" userhandle:userhandle { return terminalAstNode( 'to', userhandle ); } 
 
+// TODO: verify url
 url =
-	"url:"url:urlString { return terminalAstNode( 'url', url ); }
- 
-urlString =
-"https"?"://"("www.")?[-a-zA-Z0-9@:%._\+~#=]+"."[a-z]+([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+  "url:"url:keywordString+ { return terminalAstNode( 'url', url.join( '' ) ); } /
+	"url:" quote url:keywordString+ quote { return terminalAstNode( 'url', url.join( '' ) ); } 
 
+urlTitle =
+  "url_title:" title:keywordString+ { return terminalAstNode( 'url_title', title.join( '' ) ) }
+
+urlDescription =
+  "url_description:" title:keywordString+ { return terminalAstNode( 'url_description', title.join( '' ) ) }
+ 
 contains = 
 	"contains:" quote keyword:characterString quote { return terminalAstNode( 'contains', keyword ); } /
 	"contains:" keyword:characterString { return terminalAstNode( 'contains', keyword ); }
