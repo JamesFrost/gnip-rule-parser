@@ -645,6 +645,228 @@ describe('gnip-rule-parser', function()
 				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
 			});
 		});
+
+		describe('Retweets Of', function()
+		{
+			it('Userhandle', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'retweets_of',
+						value : '_jamesfrost'
+					}
+				];
+
+				const actualAst = parser.parse( 'retweets_of:_jamesfrost' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Userid', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'retweets_of',
+						value : '12345'
+					}
+				];
+
+				const actualAst = parser.parse( 'retweets_of:12345' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Bio Location', function()
+		{
+			it('Bio Location', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'bio_location',
+						value : 'cardiff'
+					}
+				];
+
+				const actualAst = parser.parse( 'bio_location:cardiff' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Timezone', function()
+		{
+			// TODO
+		});
+
+		describe('Statuses Count', function()
+		{
+			it('Number', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'statuses_count',
+						value : '1000'
+					}
+				];
+
+				const actualAst = parser.parse( 'statuses_count:1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Range', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'statuses_count',
+						value : 
+						{
+							lowerBound:100,
+							upperBound:1000,
+						}
+					}
+				];
+
+				const actualAst = parser.parse( 'statuses_count:100..1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Followers Count', function()
+		{
+			it('Number', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'followers_count',
+						value : '1000'
+					}
+				];
+
+				const actualAst = parser.parse( 'followers_count:1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Range', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'followers_count',
+						value : 
+						{
+							lowerBound:100,
+							upperBound:1000,
+						}
+					}
+				];
+
+				const actualAst = parser.parse( 'followers_count:100..1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Friends Count', function()
+		{
+			it('Number', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'friends_count',
+						value : '1000'
+					}
+				];
+
+				const actualAst = parser.parse( 'friends_count:1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Range', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'friends_count',
+						value : 
+						{
+							lowerBound:100,
+							upperBound:1000,
+						}
+					}
+				];
+
+				const actualAst = parser.parse( 'friends_count:100..1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Listed Count', function()
+		{
+			it('Number', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'listed_count',
+						value : '1000'
+					}
+				];
+
+				const actualAst = parser.parse( 'listed_count:1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Range', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'listed_count',
+						value : 
+						{
+							lowerBound:100,
+							upperBound:1000,
+						}
+					}
+				];
+
+				const actualAst = parser.parse( 'listed_count:100..1000' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Is Verified', function()
+		{
+			it('Is Verified', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'is',
+						value : 'verified'
+					}
+				];
+
+				const actualAst = parser.parse( 'is:verified' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
 	});
 
 	describe('Other Examples', function()

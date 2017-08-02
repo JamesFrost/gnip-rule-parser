@@ -69,17 +69,21 @@ operator =
 	sample /
   to /
   bio /
-	bioName /
-	pointradius /
+  bioName /
+  bioLocation /
+	retweetsOf /
+  pointradius /
+  statusesCount /
+  followersCount /
+  friendsCount /
+  listedCount /
+  isVerified /
 	lang /
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
 term =
 	quote _ string:keywordString+ strings:(_ keywordString+)* _ quote  { return string.join("") + ' ' + multidimensionalArrayToString( strings ); } /
 	characterString
-
-followersCount =
-	"followers_count:" number:number+ { return terminalAstNode( 'followers_count', number ); }
 
 from =
 	"from:" userhandle:number { return terminalAstNode( 'from', userhandle ); } /
@@ -107,6 +111,25 @@ urlContains =
 hasLinks =
   "has:links" { return terminalAstNode( 'has', 'links' ) }
 
+isVerified =
+  "is:verified" { return terminalAstNode( 'is', 'verified' ) }
+
+statusesCount =
+  "statuses_count:" range:numberRange { return terminalAstNode( 'statuses_count', range ); } 
+
+followersCount =
+  "followers_count:" range:numberRange { return terminalAstNode( 'followers_count', range ); } 
+
+friendsCount =
+  "friends_count:" range:numberRange { return terminalAstNode( 'friends_count', range ); } 
+
+listedCount =
+  "listed_count:" range:numberRange { return terminalAstNode( 'listed_count', range ); } 
+
+numberRange =
+  lb:number ".." ub:number { return { lowerBound: lb, upperBound:ub }; } /
+  number
+
 sample = 
   "sample:" percent:number { return terminalAstNode( 'sample', percent ) }
 
@@ -117,6 +140,13 @@ bio =
 bioName =
   "bio_name:" bioName:keywordString+ { return terminalAstNode( 'bio_name', bioName.join('') ) }
   // TODO : support quotes?
+
+bioLocation =
+  "bio_location:" bioLocation:keywordString+ { return terminalAstNode( 'bio_location', bioLocation.join('') ) }
+
+retweetsOf =
+  "retweets_of:" userhandle:userhandle+ { return terminalAstNode( 'retweets_of', userhandle.join('') ) } /
+  "retweets_of:" userId:number { return terminalAstNode( 'retweets_of', userId ) } 
 
 contains = 
 	"contains:" quote keyword:characterString quote { return terminalAstNode( 'contains', keyword ); } /
