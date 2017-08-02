@@ -63,8 +63,13 @@ operator =
 	from /
   url /
   urlTitle /
-	urlDescription /
-	to /
+  urlDescription /
+  urlContains /
+  hasLinks /
+	sample /
+  to /
+  bio /
+	bioName /
 	pointradius /
 	lang /
 	keyword:term { return terminalAstNode( 'term', keyword ); }
@@ -95,6 +100,24 @@ urlTitle =
 urlDescription =
   "url_description:" title:keywordString+ { return terminalAstNode( 'url_description', title.join( '' ) ) }
  
+urlContains =
+  "url_contains:" contains:keywordString+ { return terminalAstNode( 'url_contains', contains.join( '' ) ) } /
+  "url_contains:" quote contains:keywordString+ quote { return terminalAstNode( 'url_contains', contains.join( '' ) ) }
+
+hasLinks =
+  "has:links" { return terminalAstNode( 'has', 'links' ) }
+
+sample = 
+  "sample:" percent:number { return terminalAstNode( 'sample', percent ) }
+
+bio =
+  "bio:" bio:keywordString+ { return terminalAstNode( 'bio', bio.join('') ) }
+  // TODO : support quotes?
+
+bioName =
+  "bio_name:" bioName:keywordString+ { return terminalAstNode( 'bio_name', bioName.join('') ) }
+  // TODO : support quotes?
+
 contains = 
 	"contains:" quote keyword:characterString quote { return terminalAstNode( 'contains', keyword ); } /
 	"contains:" keyword:characterString { return terminalAstNode( 'contains', keyword ); }

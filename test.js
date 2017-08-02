@@ -467,6 +467,184 @@ describe('gnip-rule-parser', function()
 			});
 		});
 
+		describe('Url Contains', function()
+		{	
+			it('No quotes', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'url_contains',
+						value : 'gnip'
+					}
+				];
+
+				const actualAst = parser.parse( 'url_contains:gnip' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			it('Quotes', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'url_contains',
+						value : 'how-to'
+					}
+				];
+
+				const actualAst = parser.parse( 'url_contains:"how-to"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
+
+		describe('Has Links', function()
+		{	
+			it('Has Links', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'links'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:links' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
+
+		describe('Sample', function()
+		{	
+			it('5%', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'sample',
+						value : '5'
+					}
+				];
+
+				const actualAst = parser.parse( 'sample:5' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+
+			it('50%', function()
+			{
+				const expectedAst = 
+				[
+					{
+						name : 'sample',
+						value : '50'
+					}
+				];
+
+				const actualAst = parser.parse( 'sample:50' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
+			});
+		});
+
+		describe('Hashtag', function()
+		{
+			it('Hashtag', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'term',
+						value : '#test'
+					}
+				];
+
+				const actualAst = parser.parse( '#test' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Bounding Box', function()
+		{
+			// TODO
+		});
+
+		describe('Userhandle', function()
+		{
+			it('Userhandle', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'term',
+						value : '@_jamesfrost'
+					}
+				];
+
+				const actualAst = parser.parse( '@_jamesfrost' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Cashtag', function()
+		{
+			it('Cashtag', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'term',
+						value : '$TWTR'
+					}
+				];
+
+				const actualAst = parser.parse( '$TWTR' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Bio', function()
+		{
+			it('Bio', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'bio',
+						value : 'arsenal'
+					}
+				];
+
+				const actualAst = parser.parse( 'bio:arsenal' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Bio Name', function()
+		{
+			it('Bio Name', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'bio_name',
+						value : 'smith'
+					}
+				];
+
+				const actualAst = parser.parse( 'bio_name:smith' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
 	});
 
 	describe('Other Examples', function()
