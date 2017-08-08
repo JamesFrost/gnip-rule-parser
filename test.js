@@ -983,6 +983,21 @@ describe('gnip-rule-parser', function()
 
 				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
 			});
+
+			it('Profile Country Code', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_country_code',
+						value : 'GB'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_country_code:GB' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
 		});
 
 		describe('Has Geo', function()
@@ -1182,6 +1197,144 @@ describe('gnip-rule-parser', function()
 				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
 			});
 		});
+
+		describe('Profile Point Radious', function()
+		{
+			it('Profile Point Radious', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : "profile_point_radius",
+						value :
+						{
+							latitude : '-105.27346517',
+							longitude : '40.01924738',
+							distance : '10.0mi'
+						}
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_point_radius:[-105.27346517 40.01924738 10.0mi]' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Profile Bounding Box', function()
+		{
+			// TODO
+		});
+
+		describe('Profile Region', function()
+		{
+			it('Quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_region',
+						value : 'New York'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_region:"New York"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Profile Region Contains', function()
+		{
+			it('Profile Region Contains', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_region_contains',
+						value : 'carolina'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_region_contains:carolina' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Profile Locality', function()
+		{
+			it('Profile Locality', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_locality',
+						value : 'boulder'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_locality:boulder' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Profile Locality Contains', function()
+		{
+			it('Profile Locality Contains', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_locality_contains',
+						value : 'haven'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_locality_contains:haven' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Profile SubRegion', function()
+		{
+			it('Quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_subregion',
+						value : 'San Francisco County'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_subregion:"San Francisco County"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Profile SubRegion Contains', function()
+		{
+			it('No Quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_subregion_contains',
+						value : 'jefferson'
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_subregion_contains:jefferson' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+
 	});
 
 	describe('Other Examples', function()

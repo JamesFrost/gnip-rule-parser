@@ -93,6 +93,12 @@ operator =
   hasProfileGeo /
   retweetOfStatusId /
   inReplyToStatusId /
+  profileRegion /
+  profileRegionContains /
+  profileLocality /
+  profileLocalityContains /
+  profileSubRegion /
+  profileSubRegionContains /
 	lang /
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
@@ -156,6 +162,24 @@ hasProfileGeoRegion =
 hasProfileGeoLocality =
   "has:profile_geo_locality" { return terminalAstNode( 'has', 'profile_geo_locality' ) }
 
+profileRegion =
+  "profile_region:" region:multiKeywordString { return terminalAstNode( 'profile_region', region ) }
+
+profileRegionContains =
+  "profile_region_contains:" region:keywordString { return terminalAstNode( 'profile_region_contains', region ) }
+
+profileLocality =
+  "profile_locality:" region:keywordString { return terminalAstNode( 'profile_locality', region ) }
+
+profileLocalityContains =
+  "profile_locality_contains:" region:keywordString { return terminalAstNode( 'profile_locality_contains', region ) }
+
+profileSubRegion =
+  "profile_subregion:" region:multiKeywordString { return terminalAstNode( 'profile_subregion', region ) }
+
+profileSubRegionContains =
+  "profile_subregion_contains:" region:keywordString { return terminalAstNode( 'profile_subregion_contains', region ) }
+
 retweetOfStatusId =
   "retweets_of_status_id:" statusId:number { return terminalAstNode( 'retweets_of_status_id', statusId ) }
 
@@ -174,6 +198,7 @@ placeContains =
   "place_contains:" place:keywordString { return terminalAstNode( 'place_contains', place ) }
 
 countryCode =
+  "profile_country_code:" countryCode:keywordString { return terminalAstNode( 'profile_country_code', countryCode ) } /
   "country_code:" countryCode:keywordString { return terminalAstNode( 'country_code', countryCode ) }
 
 statusesCount =
@@ -221,6 +246,7 @@ lang =
 	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
 
 pointradius =
+  "profile_point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'profile_point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); } /
 	"point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); }
 
 latitude = 
