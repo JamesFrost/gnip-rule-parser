@@ -26,7 +26,7 @@
 		{
 			return thisArrayElement.reduce(function( carry, thisElement )
 			{
-				return carry + ' ' + thisElement.join( '' );
+				return carry + ' ' + thisElement;
 
 			}).trim();
 
@@ -78,11 +78,26 @@ operator =
   friendsCount /
   listedCount /
   isVerified /
+  isRetweet /
+  source /
+  place /
+  placeContains /
+  countryCode /
+  hasGeo /
+  hasHashtags /
+  hasMentions /
+  hasMedia /
+  hasProfileGeoRegion /
+  hasProfileGeoSubRegion /
+  hasProfileGeoLocality /
+  hasProfileGeo /
+  retweetOfStatusId /
+  inReplyToStatusId /
 	lang /
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
 term =
-	quote _ string:keywordString+ strings:(_ keywordString+)* _ quote  { return string.join("") + ' ' + multidimensionalArrayToString( strings ); } /
+	quote _ string:keywordString strings:(_ keywordString)* _ quote  { return string + ' ' + multidimensionalArrayToString( strings ); } /
 	characterString
 
 from =
@@ -95,24 +110,71 @@ to =
 
 // TODO: verify url
 url =
-  "url:"url:keywordString+ { return terminalAstNode( 'url', url.join( '' ) ); } /
-	"url:" quote url:keywordString+ quote { return terminalAstNode( 'url', url.join( '' ) ); } 
+  "url:"url:keywordString { return terminalAstNode( 'url', url); } /
+	"url:" quote url:keywordString quote { return terminalAstNode( 'url', url ); } 
 
 urlTitle =
-  "url_title:" title:keywordString+ { return terminalAstNode( 'url_title', title.join( '' ) ) }
+  "url_title:" title:keywordString { return terminalAstNode( 'url_title', title ) }
 
 urlDescription =
-  "url_description:" title:keywordString+ { return terminalAstNode( 'url_description', title.join( '' ) ) }
+  "url_description:" title:keywordString { return terminalAstNode( 'url_description', title ) }
  
 urlContains =
-  "url_contains:" contains:keywordString+ { return terminalAstNode( 'url_contains', contains.join( '' ) ) } /
-  "url_contains:" quote contains:keywordString+ quote { return terminalAstNode( 'url_contains', contains.join( '' ) ) }
+  "url_contains:" contains:keywordString { return terminalAstNode( 'url_contains', contains ) } /
+  "url_contains:" quote contains:keywordString quote { return terminalAstNode( 'url_contains', contains ) }
+
+isVerified =
+  "is:verified" { return terminalAstNode( 'is', 'verified' ) }
+
+isRetweet =
+  "is:retweet" { return terminalAstNode( 'is', 'retweet' ) }
 
 hasLinks =
   "has:links" { return terminalAstNode( 'has', 'links' ) }
 
-isVerified =
-  "is:verified" { return terminalAstNode( 'is', 'verified' ) }
+hasGeo =
+  "has:geo" { return terminalAstNode( 'has', 'geo' ) }
+
+hasHashtags =
+  "has:hashtags" { return terminalAstNode( 'has', 'hashtags' ) }
+
+hasMentions =
+  "has:mentions" { return terminalAstNode( 'has', 'mentions' ) }
+
+hasMedia =
+  "has:media" { return terminalAstNode( 'has', 'media' ) }
+
+hasProfileGeo =
+  "has:profile_geo" { return terminalAstNode( 'has', 'profile_geo' ) }
+
+hasProfileGeoSubRegion =
+  "has:profile_geo_subregion" { return terminalAstNode( 'has', 'profile_geo_subregion' ) }
+
+hasProfileGeoRegion =
+  "has:profile_geo_region" { return terminalAstNode( 'has', 'profile_geo_region' ) }
+
+hasProfileGeoLocality =
+  "has:profile_geo_locality" { return terminalAstNode( 'has', 'profile_geo_locality' ) }
+
+retweetOfStatusId =
+  "retweets_of_status_id:" statusId:number { return terminalAstNode( 'retweets_of_status_id', statusId ) }
+
+inReplyToStatusId =
+  "in_reply_to_status_id:" statusId:number { return terminalAstNode( 'in_reply_to_status_id', statusId ) }
+
+source =
+  "source:" source:multiKeywordString { return terminalAstNode( 'source', source ) } /
+  "source:" source:keywordString { return terminalAstNode( 'source', source ) }
+
+place =
+  "place:" place:multiKeywordString { return terminalAstNode( 'place', place ) } /
+  "place:" place:keywordString { return terminalAstNode( 'place', place ) }
+
+placeContains =
+  "place_contains:" place:keywordString { return terminalAstNode( 'place_contains', place ) }
+
+countryCode =
+  "country_code:" countryCode:keywordString { return terminalAstNode( 'country_code', countryCode ) }
 
 statusesCount =
   "statuses_count:" range:numberRange { return terminalAstNode( 'statuses_count', range ); } 
@@ -134,15 +196,15 @@ sample =
   "sample:" percent:number { return terminalAstNode( 'sample', percent ) }
 
 bio =
-  "bio:" bio:keywordString+ { return terminalAstNode( 'bio', bio.join('') ) }
+  "bio:" bio:keywordString { return terminalAstNode( 'bio', bio ) }
   // TODO : support quotes?
 
 bioName =
-  "bio_name:" bioName:keywordString+ { return terminalAstNode( 'bio_name', bioName.join('') ) }
+  "bio_name:" bioName:keywordString { return terminalAstNode( 'bio_name', bioName ) }
   // TODO : support quotes?
 
 bioLocation =
-  "bio_location:" bioLocation:keywordString+ { return terminalAstNode( 'bio_location', bioLocation.join('') ) }
+  "bio_location:" bioLocation:keywordString { return terminalAstNode( 'bio_location', bioLocation ) }
 
 retweetsOf =
   "retweets_of:" userhandle:userhandle+ { return terminalAstNode( 'retweets_of', userhandle.join('') ) } /
@@ -170,8 +232,11 @@ longitude =
 distance =
 	number:number "." decimal:number unit:"mi" { return number + '.' + decimal + unit; } // TODO : other distance units
 
+multiKeywordString =
+  quote _ string:keywordString strings:(_ keywordString)* _ quote  { return string + ' ' + multidimensionalArrayToString( strings ); } 
+
 keywordString =
-	[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\]^_`{|}~] / 
+	string:[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+ { return string.join('' ); } / 
 	emojis:Emoji { return emoji( emojis ); }
 
 characterString =

@@ -867,6 +867,321 @@ describe('gnip-rule-parser', function()
 				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
 			});
 		});
+
+		describe('Source', function()
+		{
+			it('No quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'source',
+						value : 'web'
+					}
+				];
+
+				const actualAst = parser.parse( 'source:web' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'source',
+						value : 'Twitter for iPhone'
+					}
+				];
+
+				const actualAst = parser.parse( 'source:"Twitter for iPhone"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Place', function()
+		{
+			it('No quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'place',
+						value : 'Florida'
+					}
+				];
+
+				const actualAst = parser.parse( 'place:Florida' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'place',
+						value : 'Rio de Janeiro'
+					}
+				];
+
+				const actualAst = parser.parse( 'place:"Rio de Janeiro"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Place ID', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'place',
+						value : 'fd70c22040963ac7'
+					}
+				];
+
+				const actualAst = parser.parse( 'place:fd70c22040963ac7' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Place Contains', function()
+		{
+			it('No quotes', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'place_contains',
+						value : 'USA'
+					}
+				];
+
+				const actualAst = parser.parse( 'place_contains:USA' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Country Code', function()
+		{
+			it('Country Code', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'country_code',
+						value : 'GB'
+					}
+				];
+
+				const actualAst = parser.parse( 'country_code:GB' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Geo', function()
+		{
+			it('Has Geo', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'geo'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:geo' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Mentions', function()
+		{
+			it('Has Mentions', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'mentions'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:mentions' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Hashtags', function()
+		{
+			it('Has Hashtags', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'hashtags'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:hashtags' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Media', function()
+		{
+			it('Has Media', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'media'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:media' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Is Retweet', function()
+		{
+			it('Is Retweet', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'is',
+						value : 'retweet'
+					}
+				];
+
+				const actualAst = parser.parse( 'is:retweet' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Retweets Of Status ID', function()
+		{
+			it('Retweets Of Status ID', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'retweets_of_status_id',
+						value : '365697420392280064'
+					}
+				];
+
+				const actualAst = parser.parse( 'retweets_of_status_id:365697420392280064' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('In Reply To Status ID', function()
+		{
+			it('In Reply To Status ID', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'in_reply_to_status_id',
+						value : '365697420392280064'
+					}
+				];
+
+				const actualAst = parser.parse( 'in_reply_to_status_id:365697420392280064' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Profile Geo', function()
+		{
+			it('Has Profile Geo', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'profile_geo'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:profile_geo' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Profile Geo Locality', function()
+		{
+			it('Has Profile Geo Locality', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'profile_geo_locality'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:profile_geo_locality' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Profile Geo SubRegion', function()
+		{
+			it('Has Profile Geo SubRegion', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'profile_geo_subregion'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:profile_geo_subregion' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
+
+		describe('Has Profile Geo Region', function()
+		{
+			it('Has Profile Geo Region', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'has',
+						value : 'profile_geo_region'
+					}
+				];
+
+				const actualAst = parser.parse( 'has:profile_geo_region' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+		});
 	});
 
 	describe('Other Examples', function()
