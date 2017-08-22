@@ -718,7 +718,35 @@ describe('gnip-rule-parser', function()
 
 		describe('Timezone', function()
 		{
-			// TODO
+			it('City', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'time_zone',
+						value : 'Dublin'
+					}
+				];
+
+				const actualAst = parser.parse( 'time_zone:"Dublin"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
+
+			it('Timezone', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'time_zone',
+						value : 'Eastern Time (US & Canada)'
+					}
+				];
+
+				const actualAst = parser.parse( 'time_zone:"Eastern Time (US & Canada)"' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
 		});
 
 		describe('Statuses Count', function()

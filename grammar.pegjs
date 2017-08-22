@@ -100,6 +100,7 @@ operator =
   profileSubRegion /
   profileSubRegionContains /
   boundingBox /
+  timeZone /
 	lang /
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
@@ -245,6 +246,9 @@ proximity =
 
 lang = 
 	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
+
+timeZone =
+  "time_zone:" timezone:multiKeywordString { return terminalAstNode( 'time_zone', timezone.trim() ); }
 
 pointradius =
   "profile_point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'profile_point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); } /
