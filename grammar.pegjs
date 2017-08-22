@@ -99,6 +99,7 @@ operator =
   profileLocalityContains /
   profileSubRegion /
   profileSubRegionContains /
+  boundingBox /
 	lang /
 	keyword:term { return terminalAstNode( 'term', keyword ); }
 
@@ -249,6 +250,12 @@ pointradius =
   "profile_point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'profile_point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); } /
 	"point_radius:[" latitude:latitude whiteSpace longitude:longitude whiteSpace distance:distance "]" { return terminalAstNode( 'point_radius', { latitude : latitude, longitude : longitude, distance : distance } ); }
 
+boundingBox =
+  "profile_bounding_box:" _ box:coordinateBox { return terminalAstNode( 'profile_bounding_box', box ); } /
+  "bounding_box:" _ box:coordinateBox { return terminalAstNode( 'bounding_box', box ); }
+
+coordinateBox = "[" westLong:decimal whiteSpace southLat:decimal whiteSpace eastLong:decimal whiteSpace northLat:decimal "]" { return { westLong : westLong, southLat : southLat, eastLong : eastLong, northLat : northLat } }
+
 latitude = 
 	minus:minus? latitude:number period decimal:number { return '' + minus + latitude + '.' + decimal; } // TODO : limit number range
 
@@ -297,6 +304,9 @@ period =
 
 and = 
 	_ { return 'AND'; }
+
+decimal =
+  minus:"-"? n1:number "." n2:number { return (minus || '') + n1 + "." + n2 }
 
 number =
 	number:[0-9]+ { return number.join(''); }

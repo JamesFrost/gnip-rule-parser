@@ -571,7 +571,26 @@ describe('gnip-rule-parser', function()
 
 		describe('Bounding Box', function()
 		{
-			// TODO
+			it('Bounding Box', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'bounding_box',
+						value : 
+						{
+				            "eastLong": "-105.178505",
+				            "northLat": "40.09455",
+				            "southLat": "39.964069",
+				            "westLong": "-105.301758"
+			           }
+					}
+				];
+
+				const actualAst = parser.parse( 'bounding_box:[-105.301758 39.964069 -105.178505 40.09455]' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
 		});
 
 		describe('Userhandle', function()
@@ -1223,7 +1242,26 @@ describe('gnip-rule-parser', function()
 
 		describe('Profile Bounding Box', function()
 		{
-			// TODO
+			it('Profile Bounding Box', function()
+			{	
+				const expectedAst = 
+				[
+					{
+						name : 'profile_bounding_box',
+						value : 
+						{
+				            "eastLong": "-105.178505",
+				            "northLat": "40.09455",
+				            "southLat": "39.964069",
+				            "westLong": "-105.301758"
+			           }
+					}
+				];
+
+				const actualAst = parser.parse( 'profile_bounding_box: [-105.301758 39.964069 -105.178505 40.09455]' );
+
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+			});
 		});
 
 		describe('Profile Region', function()
