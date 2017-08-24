@@ -111,10 +111,6 @@ keywordMatch =
 exactMatch =
   keywords:multiKeywordString { return terminalAstNode( 'exact_match', keywords ) }
 
-// term =
-// 	quote _ string:keywordString strings:(_ keywordString)* _ quote  { return string + ' ' + multidimensionalArrayToString( strings ); } /
-// 	characterString
-
 from =
 	"from:" userhandle:number { return terminalAstNode( 'from', userhandle ); } /
 	"from:" userhandle:userhandle { return terminalAstNode( 'from', userhandle ); } 
@@ -250,7 +246,7 @@ contains =
 
 proximity =
 	term:multiKeywordString "~" distance:number { return terminalAstNode( 'proximity', { term : term, distance : distance } ); }
-//todo
+
 lang = 
 	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
 

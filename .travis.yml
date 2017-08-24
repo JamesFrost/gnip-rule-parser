@@ -7,4 +7,4 @@ node_js:
   - "6"
   - "node"
   - "iojs"  
-before_install: npm install -g mocha
+before_install: npm install -g mocha && npm install -g pegjs && pegjs grammar.pegjs
