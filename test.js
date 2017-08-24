@@ -12,7 +12,7 @@ describe('gnip-rule-parser', function()
 			const expectedAst = 
 			[
 				{
-					name : "term",
+					name : "keyword",
 					value : "happy"
 				}
 			];
@@ -31,12 +31,12 @@ describe('gnip-rule-parser', function()
 					value : 'AND',
 					leftBranch : 
 					{
-						name : 'term',
+						name : 'keyword',
 						value : 'happy'
 					},
 					rightBranch :
 					{
-						name : 'term',
+						name : 'keyword',
 						value : 'party'
 					}
 				}
@@ -55,11 +55,11 @@ describe('gnip-rule-parser', function()
 					name: "boolean",
 					value: "OR",
 					leftBranch: {
-						name: "term",
+						name: "keyword",
 						value: "happy"
 					},
 					rightBranch: {
-						name: "term",
+						name: "keyword",
 						value: "party"
 					}
 				}
@@ -78,11 +78,11 @@ describe('gnip-rule-parser', function()
 					name: "boolean",
 					value: "NOT",
 					leftBranch: {
-						name: "term",
+						name: "keyword",
 						value: "happy"
 					},
 					rightBranch: {
-						name: "term",
+						name: "keyword",
 						value: "birthday"
 					}
 				}
@@ -95,17 +95,15 @@ describe('gnip-rule-parser', function()
 
 		it('Grouping with parentheses', function()
 		{
-			// TODO : AST test
 			parser.parse( '(happy OR party) (holiday OR house) -(birthday OR democratic OR republican)' );
 		});
 
 		it('Exact match', function()
 		{
-			// TODO - Differ ast for exact match?
 			const expectedAst = 
 			[
 				{
-					name : "term",
+					name : "exact_match",
 					value : "happy birthday"
 				}
 			];
@@ -214,7 +212,7 @@ describe('gnip-rule-parser', function()
 				const expectedAst = 
 				[
 					{
-						name : "term",
+						name : "keyword",
 						value : "🍕"
 					}
 				];
@@ -229,7 +227,7 @@ describe('gnip-rule-parser', function()
 				const expectedAst = 
 				[
 					{
-						name : "term",
+						name : "exact_match",
 						value : "I need 🍕"
 					}
 				];
@@ -244,7 +242,7 @@ describe('gnip-rule-parser', function()
 			// 	const expectedAst = 
 			// 	[
 			// 		{
-			// 			name : "term",
+			// 			name : "keyword",
 			// 			value : "\u2615"
 			// 		}
 			// 	];
@@ -267,12 +265,12 @@ describe('gnip-rule-parser', function()
 						value : 'AND',
 						leftBranch :
 						{
-							name : 'term',
+							name : 'keyword',
 							value : 'call'
 						},
 						rightBranch : 
 						{
-							name : 'term',
+							name : 'keyword',
 							value : 'gnip'
 						}
 					}
@@ -288,7 +286,7 @@ describe('gnip-rule-parser', function()
 			// 	const expectedAst = 
 			// 	[
 			// 		{
-			// 			name : "term",
+			// 			name : "keyword",
 			// 			value : "one/two"
 			// 		}
 			// 	];
@@ -558,7 +556,7 @@ describe('gnip-rule-parser', function()
 				const expectedAst = 
 				[
 					{
-						name : 'term',
+						name : 'keyword',
 						value : '#test'
 					}
 				];
@@ -600,7 +598,7 @@ describe('gnip-rule-parser', function()
 				const expectedAst = 
 				[
 					{
-						name : 'term',
+						name : 'keyword',
 						value : '@_jamesfrost'
 					}
 				];
@@ -618,7 +616,7 @@ describe('gnip-rule-parser', function()
 				const expectedAst = 
 				[
 					{
-						name : 'term',
+						name : 'keyword',
 						value : '$TWTR'
 					}
 				];

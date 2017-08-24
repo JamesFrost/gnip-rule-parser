@@ -102,11 +102,18 @@ operator =
   boundingBox /
   timeZone /
 	lang /
-	keyword:term { return terminalAstNode( 'term', keyword ); }
+  keywordMatch /
+	exactMatch 
 
-term =
-	quote _ string:keywordString strings:(_ keywordString)* _ quote  { return string + ' ' + multidimensionalArrayToString( strings ); } /
-	characterString
+keywordMatch =
+  keyword:characterString { return terminalAstNode( 'keyword', keyword ); }
+
+exactMatch =
+  keywords:multiKeywordString { return terminalAstNode( 'exact_match', keywords ) }
+
+// term =
+// 	quote _ string:keywordString strings:(_ keywordString)* _ quote  { return string + ' ' + multidimensionalArrayToString( strings ); } /
+// 	characterString
 
 from =
 	"from:" userhandle:number { return terminalAstNode( 'from', userhandle ); } /
@@ -242,8 +249,8 @@ contains =
 	"contains:" keyword:characterString { return terminalAstNode( 'contains', keyword ); }
 
 proximity =
-	term:term "~" distance:number { return terminalAstNode( 'proximity', { term : term, distance : distance } ); }
-
+	term:multiKeywordString "~" distance:number { return terminalAstNode( 'proximity', { term : term, distance : distance } ); }
+//todo
 lang = 
 	"lang:" langCode:langCodes { return terminalAstNode('lang', langCode); }
 
