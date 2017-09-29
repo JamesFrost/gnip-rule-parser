@@ -30,7 +30,7 @@
     <h2>Demo</h2>
     <div style="text-align: center;">
       <input type="text" id="demo-input" value="'happy OR party'" style="width:350px;">
-      <dir id="output"></dir>
+      <code><pre id="output"></pre></code>
     </div>
     <hr> 
 
@@ -72,7 +72,7 @@
         }
         catch( err )
         {
-          $( '#output' ).html( err.message );
+          $( '#output' ).html( 'Rule not valid.' );
         }
       });
     });
