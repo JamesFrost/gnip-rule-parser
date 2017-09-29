@@ -9,6 +9,8 @@
     <meta name="theme-color" content="#157878">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="https://unpkg.com/gnip-rule-parser@^0.0.4/dist/GnipRuleParser.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
   </head>
   <body>
     <section class="page-header">
@@ -27,7 +29,7 @@
 	
     <h2>Demo</h2>
     <div style="text-align: center;">
-      <input type="text" id="demo-input" value="Everyone loves kappa KappaRoss" style="width:350px;">
+      <input type="text" id="demo-input" value="'happy OR party'" style="width:350px;">
       <dir id="output"></dir>
     </div>
     <hr> 
@@ -54,4 +56,25 @@
       </script>
     {% endif %}
   </body>
+
+  <script type="text/javascript">
+    
+    $( document ).ready(function()
+    {
+      $( '#output' ).html( GnipRuleParser.parse( $( '#demo-input' ).val() ) );
+
+      $( '#demo-input' ).bind('input', function()
+      {
+        try
+        {
+          var ast = GnipRuleParser.parse( $( this ).val() );
+          $( '#output' ).html( JSON.stringify( ast, null, 2 ) );
+        }
+        catch( err )
+        {
+          $( '#output' ).html( err.message );
+        }
+      });
+    });
+  </script>
 </html>
