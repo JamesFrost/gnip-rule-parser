@@ -20,6 +20,22 @@ console.log( ast );
 ```
 #### Output
 ```bash
+[ 
+  {
+    name: 'boolean',
+    value: 'OR',
+    leftBranch: 
+    { 
+      name: 'keyword', 
+      value: 'happy' 
+    },
+    rightBranch: 
+    { 
+      name: 'keyword', 
+      value: 'party' 
+    } 
+  } 
+]
 ```
 ## License
 MIT
