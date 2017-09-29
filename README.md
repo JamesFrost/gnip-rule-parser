@@ -1,5 +1,5 @@
 # gnip-rule-parser [![Build Status](https://travis-ci.org/JamesFrost/gnip-rule-parser.svg?branch=master)](https://travis-ci.org/JamesFrost/gnip-rule-parser)
-Parse GNIP rules into an abstract syntax tree. 
+Parse [GNIP rules](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview) into an abstract syntax tree. 
 
 [Try the online demo here](http://jamesfrost.me/gnip-rule-parser/).
 
