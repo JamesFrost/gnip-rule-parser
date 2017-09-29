@@ -28,8 +28,10 @@
     <section class="main-content">
 	
     <h2>Demo</h2>
+    <div style="text-align: center;">
       <input type="text" id="demo-input" value="happy OR party" style="width:350px;">
-      <code><pre id="output"></pre></code>
+    </div>
+    <code><pre id="output"></pre></code>
     <hr> 
 
      {{ content }}
@@ -59,7 +61,8 @@
     
     $( document ).ready(function()
     {
-      $( '#output' ).html( GnipRuleParser.parse( $( '#demo-input' ).val() ) );
+      var initialAst =  GnipRuleParser.parse( $( '#demo-input' ).val() );
+      $( '#output' ).html( JSON.stringify( initialAst, null, 2 ) );
 
       $( '#demo-input' ).bind('input', function()
       {
