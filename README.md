@@ -14,9 +14,16 @@ mocha
 ```js
 var parser = require( 'gnip-rule-parser' );
 
-var ast = parser.parse( 'happy OR party' );
+try
+{
+  var ast = parser.parse( 'happy OR party' );
 
-console.log( ast ); 
+  console.log( ast ); 
+}
+catch( err )
+{ 
+  // Rule isn't valid
+}
 ```
 #### Output
 ```bash
