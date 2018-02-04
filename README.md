@@ -3,7 +3,7 @@ Parse [GNIP PowerTrack/Search rules](https://developer.twitter.com/en/docs/tweet
 
 [Try the online demo here](http://jamesfrost.me/gnip-rule-parser/).
 
-*If you want to validate rules, I strongly suggest you use the [validation API endpoint](https://developer.twitter.com/en/docs/tweets/filter-realtime/api-reference/powertrack-stream).*
+*If you want to validate rules, I strongly suggest you use the [validation API endpoint](https://developer.twitter.com/en/docs/tweets/filter-realtime/api-reference/powertrack-stream#get-validation).*
 
 ## Getting Started
 ### Installation
