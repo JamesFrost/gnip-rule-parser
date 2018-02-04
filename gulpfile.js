@@ -3,9 +3,9 @@ const pegjs = require( 'gulp-pegjs' );
 const uglify = require( 'gulp-uglify' );
 const rename = require( 'gulp-rename' );
 
-gulp.task('build-web', function() 
+gulp.task('build-web', function()
 {
-    return gulp.src( 'grammar.pegjs' )
+    return gulp.src( './lib/grammar.pegjs' )
         .pipe( pegjs( { format: "globals", exportVar: "GnipRuleParser" } ) )
         .pipe( uglify() )
         .pipe( rename( { suffix : '.min', basename : 'GnipRuleParser' } ) )

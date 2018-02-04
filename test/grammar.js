@@ -1,6 +1,6 @@
 const assert = require( 'assert' );
 
-const parser = require( './grammar.js' );
+const parser = require( './../index' );
 
 describe('gnip-rule-parser', function()
 {
@@ -8,8 +8,8 @@ describe('gnip-rule-parser', function()
 	describe('Documentation Examples', function()
 	{
 		it('Keyword match', function()
-		{	
-			const expectedAst = 
+		{
+			const expectedAst =
 			[
 				{
 					name : "keyword",
@@ -24,12 +24,12 @@ describe('gnip-rule-parser', function()
 
 		it('ANDing terms with white space', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : 'boolean',
 					value : 'AND',
-					leftBranch : 
+					leftBranch :
 					{
 						name : 'keyword',
 						value : 'happy'
@@ -49,7 +49,7 @@ describe('gnip-rule-parser', function()
 
 		it('ORing terms with upper-case OR', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name: "boolean",
@@ -72,7 +72,7 @@ describe('gnip-rule-parser', function()
 
 		it('Negating terms', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name: "boolean",
@@ -100,7 +100,7 @@ describe('gnip-rule-parser', function()
 
 		it('Exact match', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : "exact_match",
@@ -115,7 +115,7 @@ describe('gnip-rule-parser', function()
 
 		it('Substring match', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : "contains",
@@ -130,11 +130,11 @@ describe('gnip-rule-parser', function()
 
 		it('Proximity match', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : "proximity",
-					value : 
+					value :
 					{
 						term : "happy birthday",
 						distance : 3
@@ -149,7 +149,7 @@ describe('gnip-rule-parser', function()
 
 		it('The user who is posting a Tweet (username)', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : "from",
@@ -164,7 +164,7 @@ describe('gnip-rule-parser', function()
 
 		it('The user who is posting a Tweet (user id)', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : "from",
@@ -179,7 +179,7 @@ describe('gnip-rule-parser', function()
 
 		it('Geo-tagged Tweets within 10 miles of Pearl St. in Boulder, CO', function()
 		{
-			const expectedAst = 
+			const expectedAst =
 			[
 				{
 					name : "point_radius",
@@ -206,10 +206,10 @@ describe('gnip-rule-parser', function()
 	describe('List of Operators Examples', function()
 	{
 		describe('Emoji', function()
-		{	
+		{
 			it('Single Emoji', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : "keyword",
@@ -224,7 +224,7 @@ describe('gnip-rule-parser', function()
 
 			it('Multiple Emoji', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : "exact_match",
@@ -239,7 +239,7 @@ describe('gnip-rule-parser', function()
 
 			// it('Emoji Variant', function()
 			// {
-			// 	const expectedAst = 
+			// 	const expectedAst =
 			// 	[
 			// 		{
 			// 			name : "keyword",
@@ -255,10 +255,10 @@ describe('gnip-rule-parser', function()
 
 
 		describe('Exact Phrase Match', function()
-		{	
+		{
 			it('Basic', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'boolean',
@@ -268,7 +268,7 @@ describe('gnip-rule-parser', function()
 							name : 'keyword',
 							value : 'call'
 						},
-						rightBranch : 
+						rightBranch :
 						{
 							name : 'keyword',
 							value : 'gnip'
@@ -283,7 +283,7 @@ describe('gnip-rule-parser', function()
 
 			// it('Basic', function()
 			// {
-			// 	const expectedAst = 
+			// 	const expectedAst =
 			// 	[
 			// 		{
 			// 			name : "keyword",
@@ -298,10 +298,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Contains', function()
-		{	
+		{
 			it('No quotes', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'contains',
@@ -316,7 +316,7 @@ describe('gnip-rule-parser', function()
 
 			it('Quotes', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'contains',
@@ -331,10 +331,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('From', function()
-		{	
+		{
 			it('User id', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'from',
@@ -349,7 +349,7 @@ describe('gnip-rule-parser', function()
 
 			it('User handle', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'from',
@@ -364,10 +364,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('To', function()
-		{	
+		{
 			it('User id', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'to',
@@ -382,7 +382,7 @@ describe('gnip-rule-parser', function()
 
 			it('User handle', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'to',
@@ -397,10 +397,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Url', function()
-		{	
+		{
 			it('No quotes', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'url',
@@ -415,7 +415,7 @@ describe('gnip-rule-parser', function()
 
 			it('Quotes', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'url',
@@ -430,10 +430,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Url Title', function()
-		{	
+		{
 			it('Url Title', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'url_title',
@@ -448,10 +448,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Url Description', function()
-		{	
+		{
 			it('Url Description', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'url_description',
@@ -466,10 +466,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Url Contains', function()
-		{	
+		{
 			it('No quotes', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'url_contains',
@@ -484,7 +484,7 @@ describe('gnip-rule-parser', function()
 
 			it('Quotes', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'url_contains',
@@ -499,10 +499,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Has Links', function()
-		{	
+		{
 			it('Has Links', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -517,10 +517,10 @@ describe('gnip-rule-parser', function()
 		});
 
 		describe('Sample', function()
-		{	
+		{
 			it('5%', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'sample',
@@ -535,7 +535,7 @@ describe('gnip-rule-parser', function()
 
 			it('50%', function()
 			{
-				const expectedAst = 
+				const expectedAst =
 				[
 					{
 						name : 'sample',
@@ -552,8 +552,8 @@ describe('gnip-rule-parser', function()
 		describe('Hashtag', function()
 		{
 			it('Hashtag', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'keyword',
@@ -563,19 +563,19 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( '#test' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Bounding Box', function()
 		{
 			it('Bounding Box', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'bounding_box',
-						value : 
+						value :
 						{
 				            "eastLong": "-105.178505",
 				            "northLat": "40.09455",
@@ -587,15 +587,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'bounding_box:[-105.301758 39.964069 -105.178505 40.09455]' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Userhandle', function()
 		{
 			it('Userhandle', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'keyword',
@@ -605,15 +605,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( '@_jamesfrost' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Cashtag', function()
 		{
 			it('Cashtag', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'keyword',
@@ -623,15 +623,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( '$TWTR' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Bio', function()
 		{
 			it('Bio', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'bio',
@@ -641,15 +641,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'bio:arsenal' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Bio Name', function()
 		{
 			it('Bio Name', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'bio_name',
@@ -659,15 +659,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'bio_name:smith' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Retweets Of', function()
 		{
 			it('Userhandle', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'retweets_of',
@@ -677,12 +677,12 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'retweets_of:_jamesfrost' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Userid', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'retweets_of',
@@ -692,15 +692,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'retweets_of:12345' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Bio Location', function()
 		{
 			it('Bio Location', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'bio_location',
@@ -710,15 +710,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'bio_location:cardiff' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Timezone', function()
 		{
 			it('City', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'time_zone',
@@ -728,12 +728,12 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'time_zone:"Dublin"' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Timezone', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'time_zone',
@@ -743,15 +743,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'time_zone:"Eastern Time (US & Canada)"' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Statuses Count', function()
 		{
 			it('Number', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'statuses_count',
@@ -761,16 +761,16 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'statuses_count:1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Range', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'statuses_count',
-						value : 
+						value :
 						{
 							lowerBound:100,
 							upperBound:1000,
@@ -780,15 +780,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'statuses_count:100..1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Followers Count', function()
 		{
 			it('Number', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'followers_count',
@@ -798,16 +798,16 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'followers_count:1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Range', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'followers_count',
-						value : 
+						value :
 						{
 							lowerBound:100,
 							upperBound:1000,
@@ -817,15 +817,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'followers_count:100..1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Friends Count', function()
 		{
 			it('Number', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'friends_count',
@@ -835,16 +835,16 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'friends_count:1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Range', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'friends_count',
-						value : 
+						value :
 						{
 							lowerBound:100,
 							upperBound:1000,
@@ -854,15 +854,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'friends_count:100..1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Listed Count', function()
 		{
 			it('Number', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'listed_count',
@@ -872,16 +872,16 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'listed_count:1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Range', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'listed_count',
-						value : 
+						value :
 						{
 							lowerBound:100,
 							upperBound:1000,
@@ -891,15 +891,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'listed_count:100..1000' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Is Verified', function()
 		{
 			it('Is Verified', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'is',
@@ -909,15 +909,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'is:verified' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Source', function()
 		{
 			it('No quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'source',
@@ -927,12 +927,12 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'source:web' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'source',
@@ -942,15 +942,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'source:"Twitter for iPhone"' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Place', function()
 		{
 			it('No quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'place',
@@ -960,12 +960,12 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'place:Florida' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'place',
@@ -975,12 +975,12 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'place:"Rio de Janeiro"' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Place ID', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'place',
@@ -990,15 +990,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'place:fd70c22040963ac7' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Place Contains', function()
 		{
 			it('No quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'place_contains',
@@ -1008,15 +1008,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'place_contains:USA' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Country Code', function()
 		{
 			it('Country Code', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'country_code',
@@ -1026,12 +1026,12 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'country_code:GB' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 
 			it('Profile Country Code', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_country_code',
@@ -1041,15 +1041,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_country_code:GB' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Geo', function()
 		{
 			it('Has Geo', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1059,15 +1059,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:geo' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Mentions', function()
 		{
 			it('Has Mentions', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1077,15 +1077,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:mentions' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Hashtags', function()
 		{
 			it('Has Hashtags', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1095,15 +1095,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:hashtags' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Media', function()
 		{
 			it('Has Media', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1113,15 +1113,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:media' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Is Retweet', function()
 		{
 			it('Is Retweet', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'is',
@@ -1131,15 +1131,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'is:retweet' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Retweets Of Status ID', function()
 		{
 			it('Retweets Of Status ID', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'retweets_of_status_id',
@@ -1149,15 +1149,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'retweets_of_status_id:365697420392280064' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('In Reply To Status ID', function()
 		{
 			it('In Reply To Status ID', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'in_reply_to_status_id',
@@ -1167,15 +1167,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'in_reply_to_status_id:365697420392280064' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Profile Geo', function()
 		{
 			it('Has Profile Geo', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1185,15 +1185,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:profile_geo' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Profile Geo Locality', function()
 		{
 			it('Has Profile Geo Locality', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1203,15 +1203,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:profile_geo_locality' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Profile Geo SubRegion', function()
 		{
 			it('Has Profile Geo SubRegion', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1221,15 +1221,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:profile_geo_subregion' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Has Profile Geo Region', function()
 		{
 			it('Has Profile Geo Region', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'has',
@@ -1239,15 +1239,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'has:profile_geo_region' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile Point Radious', function()
 		{
 			it('Profile Point Radious', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : "profile_point_radius",
@@ -1262,19 +1262,19 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_point_radius:[-105.27346517 40.01924738 10.0mi]' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile Bounding Box', function()
 		{
 			it('Profile Bounding Box', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_bounding_box',
-						value : 
+						value :
 						{
 				            "eastLong": "-105.178505",
 				            "northLat": "40.09455",
@@ -1286,15 +1286,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_bounding_box: [-105.301758 39.964069 -105.178505 40.09455]' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile Region', function()
 		{
 			it('Quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_region',
@@ -1304,15 +1304,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_region:"New York"' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile Region Contains', function()
 		{
 			it('Profile Region Contains', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_region_contains',
@@ -1322,15 +1322,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_region_contains:carolina' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile Locality', function()
 		{
 			it('Profile Locality', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_locality',
@@ -1340,15 +1340,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_locality:boulder' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile Locality Contains', function()
 		{
 			it('Profile Locality Contains', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_locality_contains',
@@ -1358,15 +1358,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_locality_contains:haven' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile SubRegion', function()
 		{
 			it('Quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_subregion',
@@ -1376,15 +1376,15 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_subregion:"San Francisco County"' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
 		describe('Profile SubRegion Contains', function()
 		{
 			it('No Quotes', function()
-			{	
-				const expectedAst = 
+			{
+				const expectedAst =
 				[
 					{
 						name : 'profile_subregion_contains',
@@ -1394,7 +1394,7 @@ describe('gnip-rule-parser', function()
 
 				const actualAst = parser.parse( 'profile_subregion_contains:jefferson' );
 
-				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );			
+				assert.deepEqual( actualAst, expectedAst, 'Abstract Syntax Tree incorrect.' );
 			});
 		});
 
@@ -1404,7 +1404,7 @@ describe('gnip-rule-parser', function()
 	describe('Other Examples', function()
 	{
 		it('Keyword match', function()
-		{	
+		{
 			parser.parse( '(\"powertrack -operators\" OR (-\"streaming code\"~4 foo OR bar))' );
 		});
 	});
