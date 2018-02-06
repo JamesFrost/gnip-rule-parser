@@ -1,8 +1,8 @@
 const assert = require( 'assert' );
 
-const baseTweetObject = require('./data/tweet.json');
+const baseTweetObject = require('./../data/tweet.json');
 
-const parser = require( './../index' );
+const parser = require( './../../index' );
 
 const getTweetObject = function(attributes)
 {
@@ -420,7 +420,7 @@ describe('#match', function()
 
         describe('doesn\'t match', function()
         {
-          
+
         });
       });
     });
