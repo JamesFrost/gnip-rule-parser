@@ -2,7 +2,7 @@ const assert = require( 'assert' );
 
 const parser = require( './../index' );
 
-describe('gnip-rule-parser', function()
+describe('#parse', function()
 {
 	// http://support.gnip.com/apis/powertrack2.0/rules.html
 	describe('Documentation Examples', function()

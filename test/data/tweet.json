@@ -1,0 +1,260 @@
+{
+  "created_at": "Tue Feb 06 13:22:45 +0000 2018",
+  "id": 960866352566358000,
+  "id_str": "960866352566358017",
+  "text": "And hotter https://t.co/I2i6c75mOP",
+  "display_text_range": [
+    0,
+    10
+  ],
+  "source": "<a href=\"http://tapbots.com/software/tweetbot/mac\" rel=\"nofollow\">Tweetbot for Mac</a>",
+  "truncated": false,
+  "in_reply_to_status_id": null,
+  "in_reply_to_status_id_str": null,
+  "in_reply_to_user_id": null,
+  "in_reply_to_user_id_str": null,
+  "in_reply_to_screen_name": null,
+  "user": {
+    "id": 1964883696,
+    "id_str": "1964883696",
+    "name": "Josh Justice",
+    "screen_name": "CodingItWrong",
+    "location": "Atlanta, GA",
+    "url": "http://links.codingitwrong.com",
+    "description": "SLAVEOF NO ONE. These are my opinions, or are they??? Work and play at @bignerdranch",
+    "translator_type": "none",
+    "protected": false,
+    "verified": false,
+    "followers_count": 1224,
+    "friends_count": 147,
+    "listed_count": 124,
+    "favourites_count": 2348,
+    "statuses_count": 21154,
+    "created_at": "Wed Oct 16 14:43:40 +0000 2013",
+    "utc_offset": -18000,
+    "time_zone": "Eastern Time (US & Canada)",
+    "geo_enabled": true,
+    "lang": "en",
+    "contributors_enabled": false,
+    "is_translator": false,
+    "profile_background_color": "C0DEED",
+    "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+    "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+    "profile_background_tile": false,
+    "profile_link_color": "1DA1F2",
+    "profile_sidebar_border_color": "C0DEED",
+    "profile_sidebar_fill_color": "DDEEF6",
+    "profile_text_color": "333333",
+    "profile_use_background_image": true,
+    "profile_image_url": "http://pbs.twimg.com/profile_images/954009990863482880/bTDglrwb_normal.jpg",
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/954009990863482880/bTDglrwb_normal.jpg",
+    "default_profile": true,
+    "default_profile_image": false,
+    "following": null,
+    "follow_request_sent": null,
+    "notifications": null
+  },
+  "geo": null,
+  "coordinates": null,
+  "place": null,
+  "contributors": null,
+  "quoted_status_id": 960777581061554200,
+  "quoted_status_id_str": "960777581061554182",
+  "quoted_status": {
+    "created_at": "Tue Feb 06 07:30:00 +0000 2018",
+    "id": 960777581061554200,
+    "id_str": "960777581061554182",
+    "text": "JavaScript's built-in string methods keep getting better. https://t.co/MzSXg3uUHQ",
+    "display_text_range": [
+      0,
+      57
+    ],
+    "source": "<a href=\"https://ads-api.twitter.com\" rel=\"nofollow\">Twitter Ads Composer</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 35432643,
+      "id_str": "35432643",
+      "name": "Addy Osmani",
+      "screen_name": "addyosmani",
+      "location": "Mountain View, CA",
+      "url": "http://bit.ly/addyosmani",
+      "description": "Eng. Manager at Google working on @GoogleChrome & Web DevRel • Creator of TodoMVC, @Yeoman, Material Design Lite, Critical • Team @workboxjs • Husband",
+      "translator_type": "regular",
+      "protected": false,
+      "verified": true,
+      "followers_count": 175696,
+      "friends_count": 1835,
+      "listed_count": 6431,
+      "favourites_count": 24370,
+      "statuses_count": 20197,
+      "created_at": "Sun Apr 26 08:40:11 +0000 2009",
+      "utc_offset": -28800,
+      "time_zone": "Pacific Time (US & Canada)",
+      "geo_enabled": true,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/666933300175376384/6j0swZpR.png",
+      "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/666933300175376384/6j0swZpR.png",
+      "profile_background_tile": false,
+      "profile_link_color": "9D582E",
+      "profile_sidebar_border_color": "FFFFFF",
+      "profile_sidebar_fill_color": "56E372",
+      "profile_text_color": "0A0A0A",
+      "profile_use_background_image": true,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/944484726739312640/LaUJrclA_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/944484726739312640/LaUJrclA_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/35432643/1497327111",
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "quote_count": 18,
+    "reply_count": 23,
+    "retweet_count": 432,
+    "favorite_count": 1258,
+    "entities": {
+      "hashtags": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+
+      ],
+      "symbols": [
+
+      ],
+      "media": [
+        {
+          "id": 960701810607472600,
+          "id_str": "960701810607472646",
+          "indices": [
+            58,
+            81
+          ],
+          "media_url": "http://pbs.twimg.com/media/DVUZNOxVQAYNQ0c.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/DVUZNOxVQAYNQ0c.jpg",
+          "url": "https://t.co/MzSXg3uUHQ",
+          "display_url": "pic.twitter.com/MzSXg3uUHQ",
+          "expanded_url": "https://twitter.com/addyosmani/status/960777581061554182/photo/1",
+          "type": "photo",
+          "sizes": {
+            "medium": {
+              "w": 1200,
+              "h": 751,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 426,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 2048,
+              "h": 1283,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 960701810607472600,
+          "id_str": "960701810607472646",
+          "indices": [
+            58,
+            81
+          ],
+          "media_url": "http://pbs.twimg.com/media/DVUZNOxVQAYNQ0c.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/DVUZNOxVQAYNQ0c.jpg",
+          "url": "https://t.co/MzSXg3uUHQ",
+          "display_url": "pic.twitter.com/MzSXg3uUHQ",
+          "expanded_url": "https://twitter.com/addyosmani/status/960777581061554182/photo/1",
+          "type": "photo",
+          "sizes": {
+            "medium": {
+              "w": 1200,
+              "h": 751,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 426,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 2048,
+              "h": 1283,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "filter_level": "low",
+    "lang": "en"
+  },
+  "is_quote_status": true,
+  "quote_count": 0,
+  "reply_count": 0,
+  "retweet_count": 0,
+  "favorite_count": 0,
+  "entities": {
+    "hashtags": [
+
+    ],
+    "urls": [
+      {
+        "url": "https://t.co/I2i6c75mOP",
+        "expanded_url": "https://twitter.com/addyosmani/status/960777581061554182",
+        "display_url": "twitter.com/addyosmani/sta…",
+        "indices": [
+          11,
+          34
+        ]
+      }
+    ],
+    "user_mentions": [
+
+    ],
+    "symbols": [
+
+    ]
+  },
+  "favorited": false,
+  "retweeted": false,
+  "possibly_sensitive": false,
+  "filter_level": "low",
+  "lang": "en",
+  "timestamp_ms": "1517923365142"
+}
