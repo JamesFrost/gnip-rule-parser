@@ -280,6 +280,8 @@ describe('#match', function()
           });
         });
       });
+
+      // TODO: add 'one/two' example
     });
 
     describe('Proximity Operator', function()
@@ -289,7 +291,105 @@ describe('#match', function()
 
     describe('Contains', function()
     {
-      // TODO
+      describe('contains:phone', function()
+      {
+        const rule = 'contains:phone';
+        const ast = parser.parse(rule);
+
+        describe('matches', function()
+        {
+          const expectedMatch = true;
+          const tweetData =
+          [
+            {
+              text: 'Where is my phone?'
+            },
+            {
+              text: 'That\'s a telephone'
+            }
+          ];
+
+          tweetData.map(function(thisTweetData)
+          {
+            it(thisTweetData.text, function()
+            {
+              testAst(ast, getTweetObject(thisTweetData), expectedMatch)
+            });
+          });
+        });
+
+        describe('doesn\'t match', function()
+        {
+          const expectedMatch = false;
+          const tweetData =
+          [
+            {
+              text: 'Pongo la telephono.'
+            },
+            {
+              text: 'What is the ph0ne number?'
+            }
+          ];
+
+          tweetData.map(function(thisTweetData)
+          {
+            it(thisTweetData.text, function()
+            {
+              testAst(ast, getTweetObject(thisTweetData), expectedMatch)
+            });
+          });
+        });
+      });
+
+      describe('contains:"$TWTR"', function()
+      {
+        const rule = 'contains:"$TWTR"';
+        const ast = parser.parse(rule);
+
+        describe('matches', function()
+        {
+          const expectedMatch = true;
+          const tweetData =
+          [
+            {
+              text: 'How much is $TWTR stock?'
+            },
+            {
+              text: 'How much is $TWTRstock?'
+            },
+            {
+              text: 'Headlines with $GOOG$TWTR$FB today	'
+            }
+          ];
+
+          tweetData.map(function(thisTweetData)
+          {
+            it(thisTweetData.text, function()
+            {
+              testAst(ast, getTweetObject(thisTweetData), expectedMatch)
+            });
+          });
+        });
+
+        describe('doesn\'t match', function()
+        {
+          const expectedMatch = false;
+          const tweetData =
+          [
+            {
+              text: 'Just setting up my TWTR Just setting up my $ TWTR'
+            }
+          ];
+
+          tweetData.map(function(thisTweetData)
+          {
+            it(thisTweetData.text, function()
+            {
+              testAst(ast, getTweetObject(thisTweetData), expectedMatch)
+            });
+          });
+        });
+      });
     });
 
     describe('From', function()
