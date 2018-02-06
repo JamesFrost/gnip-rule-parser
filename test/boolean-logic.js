@@ -19,7 +19,7 @@ const testAst = function(ast, tweet, expectedMatch)
 describe('#match', function()
 {
   // http://support.gnip.com/apis/powertrack2.0/rules.html
-  describe('Documentation Examples', function()
+  describe('List of Operators Examples', function()
   {
     describe('Keyword', function()
     {
@@ -394,7 +394,35 @@ describe('#match', function()
 
     describe('From', function()
     {
-      // TODO
+      describe('from:17200003', function()
+      {
+        const rule = 'from:17200003';
+        const ast = parser.parse(rule);
+
+        describe('matches', function()
+        {
+          const expectedMatch = true;
+
+          it('All original tweets from user 17200003', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                id: 17200003,
+                id_str: "17200003"
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+
+        describe('doesn\'t match', function()
+        {
+          
+        });
+      });
     });
 
     describe('To', function()
