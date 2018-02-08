@@ -420,7 +420,7 @@ describe('#match', function()
 
         describe('doesn\'t match', function()
         {
-
+          // TODO
         });
       });
     });
@@ -502,7 +502,41 @@ describe('#match', function()
 
     describe('Language', function()
     {
-      // TODO
+      describe('lang:fr', function()
+      {
+        const rule = 'lang:fr';
+        const ast = parser.parse(rule);
+
+        describe('matches', function()
+        {
+          const expectedMatch = true;
+
+          it('Tweet where lang set to fr', function()
+          {
+            const tweetData =
+            {
+              lang: 'fr'
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+
+        describe('doesn\'t match', function()
+        {
+          const expectedMatch = false;
+
+          it('Tweet where lang set to en', function()
+          {
+            const tweetData =
+            {
+              lang: 'en'
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+      });
     });
 
     describe('Bio Location', function()
