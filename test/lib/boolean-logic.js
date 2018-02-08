@@ -522,7 +522,154 @@ describe('#match', function()
 
     describe('Followers Count', function()
     {
-      // TODO
+      describe('followers_count:1000', function()
+      {
+        const rule = 'followers_count:1000';
+        const ast = parser.parse(rule);
+
+        describe('matches', function()
+        {
+          const expectedMatch = true;
+
+          it('Tweets that have followers_count == 1000', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:1000
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+
+          it('Tweets that have followers_count == 1000000', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:1000000
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+
+        describe('doesn\'t match', function()
+        {
+          const expectedMatch = false;
+
+          it('Tweets that have followers_count == 999', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:999
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+
+          it('Tweets that have followers_count == 100', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:100
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+      });
+
+      describe('followers_count:1000..10000', function()
+      {
+        const rule = 'followers_count:1000..10000';
+        const ast = parser.parse(rule);
+
+        describe('matches', function()
+        {
+          const expectedMatch = true;
+
+          it('Tweets that have followers_count == 1000', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:1000
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+
+          it('Tweets that have followers_count == 6814', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:6814
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+
+          it('Tweets that have followers_count == 10000', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:10000
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+
+        describe('doesn\'t match', function()
+        {
+          const expectedMatch = false;
+
+          it('Tweets that have followers_count == 999', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:999
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+
+          it('Tweets that have followers_count == 10001', function()
+          {
+            const tweetData =
+            {
+              user:
+              {
+                followers_count:100
+              }
+            };
+
+            testAst(ast, getTweetObject(tweetData), expectedMatch);
+          });
+        });
+      });
     });
 
     describe('Friends Count', function()
