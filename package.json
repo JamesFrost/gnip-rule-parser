@@ -16,9 +16,7 @@
     "url": "https://github.com/JamesFrost/gnip-rule-parser/issues"
   },
   "homepage": "https://github.com/JamesFrost/gnip-rule-parser#readme",
-  "dependencies": {
-    "natural": "^0.5.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "assert": "^1.4.1",
     "gulp": "^3.9.1",
