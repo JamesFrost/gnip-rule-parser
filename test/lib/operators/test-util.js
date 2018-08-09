@@ -1,3 +1,4 @@
+const cloneDeep = require( 'clone-deep' );
 const assert = require( 'assert' );
 
 const baseTweetObject = require('./../../data/tweet.json');
@@ -11,7 +12,8 @@ exports.parse = function(rule)
 
 exports.getTweetObject = function(attributes)
 {
-  return Object.assign(baseTweetObject, attributes);
+  const clone = cloneDeep(baseTweetObject)
+  return Object.assign(clone, attributes);
 };
 
 exports.testAst = function(ast, tweet, expectedMatch)

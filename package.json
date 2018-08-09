@@ -19,6 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "assert": "^1.4.1",
+    "clone-deep": "^4.0.0",
     "gulp": "^3.9.1",
     "gulp-peg": "^0.2.0",
     "gulp-pegjs": "^0.1.0",
